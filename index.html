@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!---------------------------------------------- -- css bootstrap cdn link-------------------------------------------- -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!---------------------------------------------- -- css bootstrap cdn link-------------------------------------------- -->
+
+    <title>Book Search</title>
+    <!-- <style>
+        #spinner {
+            display: none;
+        }
+    </style> -->
+</head>
+
+<body>
+
+    <h1 class="text-center text-success p-5">Search your Books</h1>
+    <div class="container">
+        <div class="input-group mb-3 w-50 mx-auto mb-5">
+            <!-- input result -->
+            <input id="search-area" type="text" class="form-control border-success" placeholder="search your book"
+                aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button onclick="searchBook()" class="btn btn-success" type="button" id="button-addon2">Search</button>
+        </div>
+    </div>
+    <!-- error field -->
+    <div id="errorMessage" class="text-center title ">
+    </div>
+    <!-- spinner -->
+    <!-- <div id="spinner">Loading...</div> -->
+    <!-- total field -->
+    <div id="found" class="text-center title mb-3"></div>
+    <!-- search result -->
+    <div id="search-result" class="row row-cols-1 row-cols-md-3 g-4">
+    </div>
+
+
+    <!---------------------------------------------- -- bootstrap js cdn link-------------------------------------------- -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <!---------------------------------------------- -- bootstrap js cdn link-------------------------------------------- -->
+
+    <script src="app.js"></script>
+</body>
+
+</html>
