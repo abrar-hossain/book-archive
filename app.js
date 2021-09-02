@@ -2,12 +2,6 @@
 const toggleSpinner = displayStyle => {
     document.getElementById('spinner').style.display = displayStyle;
 }
-const toggleSearchResult = displayStyle => {
-    document.getElementById('search-result').style.display = displayStyle;
-}
-/* const total = displayStyle => {
-    document.getElementById('found').style.display = displayStyle;
-} */
 
 //fetch all book data
 const searchBook = async () => {
@@ -27,7 +21,6 @@ const searchBook = async () => {
     document.getElementById('found').innerText = '';
 
     toggleSpinner('block');
-    toggleSearchResult('none')
     //api url
     const url = `https://openlibrary.org/search.json?q=${searchText}`;
     //get data
@@ -49,6 +42,7 @@ const displayBooks = (books, numbers) => {
     }
     //check undefined(set no value) data
     const filterBooks = books.filter(info => info.cover_i !== undefined && info.author_name !== undefined && info.first_publish_year !== undefined && info.publisher !== undefined);
+    //display total number
     document.getElementById('found').innerText = `${numbers} books found`;
     //array loop
     filterBooks.slice(0, 30).forEach(filterBook => {
@@ -74,7 +68,6 @@ const displayBooks = (books, numbers) => {
     });
 
     toggleSpinner('none');
-    toggleSearchResult('block');
 }
 
 
