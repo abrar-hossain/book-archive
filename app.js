@@ -14,11 +14,13 @@ const searchBook = async () => {
     //console.log(searchText);
     /* error handling */
     if (searchText == '') {
-        document.getElementById('errorMessage').innerText = 'Search field should not be empty.'
+        document.getElementById('errorMessage').innerText = 'Search field should not be empty.';
+        document.getElementById('search-result').textContent = '';
+        document.getElementById('found').textContent = '';
         return;
     }
-    document.getElementById('errorMessage').innerText = '';
-    document.getElementById('search-area').innerText = '';
+    document.getElementById('errorMessage').textContent = '';
+    document.getElementById('search-result').textContent = '';
     document.getElementById('found').innerText = '';
 
     //toggleSpinner('block');
