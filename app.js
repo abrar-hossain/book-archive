@@ -1,10 +1,13 @@
 //show spinner for loading
-// const toggleSpinner = displayStyle => {
-//     document.getElementById('spinner').style.display = displayStyle;
-// }
-// const toggleSearchResult = displayStyle => {
-//     document.getElementById('search-result').style.display = displayStyle;
-// }
+const toggleSpinner = displayStyle => {
+    document.getElementById('spinner').style.display = displayStyle;
+}
+const toggleSearchResult = displayStyle => {
+    document.getElementById('search-result').style.display = displayStyle;
+}
+/* const total = displayStyle => {
+    document.getElementById('found').style.display = displayStyle;
+} */
 
 //fetch all book data
 const searchBook = async () => {
@@ -13,7 +16,7 @@ const searchBook = async () => {
     searchField.value = '';
     //console.log(searchText);
     /* error handling */
-    if (searchText == '') {
+    if (searchText === '') {
         document.getElementById('errorMessage').innerText = 'Search field should not be empty.';
         document.getElementById('search-result').textContent = '';
         document.getElementById('found').textContent = '';
@@ -23,48 +26,49 @@ const searchBook = async () => {
     document.getElementById('search-result').textContent = '';
     document.getElementById('found').innerText = '';
 
-    //toggleSpinner('block');
-    //toggleSearchResult('none')
+    toggleSpinner('block');
+    toggleSearchResult('none')
     //api url
     const url = `https://openlibrary.org/search.json?q=${searchText}`;
     //get data
     const res = await fetch(url);
     const data = await res.json();
 
-    displayBooks(data.docs);
-    displayNumber(data.numFound);
+    displayBooks(data.docs, data.numFound);
+    //displayNumber(data.numFound);
 }
 //display total book
-const displayNumber = total => {
+/* const displayNumber = total => {
     document.getElementById('found').innerHTML = `${total} books found`;
-    //toggleSpinner('none');
-}
+    toggleSpinner('none');
+} */
 //display books from api
-const displayBooks = books => {
+const displayBooks = (books, numbers) => {
     //console.log(books);
     //error handling
     if (books.length === 0) {
         document.getElementById('errorMessage').innerText = 'Result not found';
+        toggleSpinner('none');
         return;
     }
+    document.getElementById('found').innerHTML = `${numbers} books found`;
+    //check undefined
+    const filterBooks = books.filter(info => info.cover_i !== undefined && info.author_name !== undefined && info.first_publish_year !== undefined && info.publisher !== undefined);
     //array loop
-    books.forEach(book => {
-        // console.log(book);
-
-
-        const container = document.getElementById('search-result');
-
+    const container = document.getElementById('search-result');
+    filterBooks.slice(0, 30).forEach(filterBook => {
+        console.log(filterBook);
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
     
             <div class="card h-100">
                 <div class="card-body border border-success">
-                    <img class="card-img-top mb-5" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg">
-                        <h1 class="card-title text-center"> ${book.title}</h1>
-                        <h3 class="card-text"> author: ${book.author_name ? book.author_name : ''} </h3>
-                        <h4 class="card-text"> publisher: ${book.publisher ? book.publisher : ''} </h4>
-                        <h6 class="card-text"> publishing year: ${book.publish_year} </h6>
+                    <img class="card-img-top mb-5" src="https://covers.openlibrary.org/b/id/${filterBook.cover_i}-M.jpg">
+                        <h1 class="card-title text-center"> ${filterBook.title}</h1>
+                        <h3 class="card-text"> author: ${filterBook.author_name} </h3>
+                        <h4 class="card-text"> publisher: ${filterBook.publisher} </h4>
+                        <h6 class="card-text"> First publishing year: ${filterBook.first_publish_year} </h6>
                 </div>
             </div>
             `;
@@ -73,8 +77,8 @@ const displayBooks = books => {
 
     });
 
-    //toggleSpinner('none');
-    //toggleSearchResult('block');
+    toggleSpinner('none');
+    toggleSearchResult('block');
 }
 
 
