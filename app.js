@@ -47,10 +47,9 @@ const displayBooks = (books, numbers) => {
         toggleSpinner('none');
         return;
     }
-
     //check undefined(set no value) data
     const filterBooks = books.filter(info => info.cover_i !== undefined && info.author_name !== undefined && info.first_publish_year !== undefined && info.publisher !== undefined);
-    document.getElementById('errorMessage').innerText = `${numbers} books found`;
+    document.getElementById('found').innerText = `${numbers} books found`;
     //array loop
     filterBooks.slice(0, 30).forEach(filterBook => {
         console.log(filterBook);
